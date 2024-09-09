@@ -30,6 +30,6 @@ jobs:
       working-directory: ./
       run: npm install
     - name: Installing dependencies on frontend
-      working-directory: src
+      working-directory: ./client
       run: npm install && npm install --save-dev jest
     - run: npm run test
