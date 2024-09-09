@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
     - name: Installing dependencies on backend
       working-directory: ./
-      run: npm install
+      run: npm install && npm install --save-dev jest
     - name: Installing dependencies on frontend
       working-directory: ./client
       run: npm install && npm install --save-dev jest
