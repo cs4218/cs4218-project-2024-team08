@@ -19,10 +19,10 @@ jobs:
       run: npx playwright install --with-deps
     - name: Start Server
       run: npm run dev
-    - name: Run Playwright tests
-      run: npx playwright test
       env:
         DEV_MODE: test
+    - name: Run Playwright tests
+      run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
