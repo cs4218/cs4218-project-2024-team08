@@ -15,6 +15,11 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
+    - name: Modify to package.json
+      run: |
+        if ! grep -q '"type": "module"' package.json; then
+          jq '. + {"type": "module"}' package.json > temp.json && mv temp.json package.json
+        fi
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
