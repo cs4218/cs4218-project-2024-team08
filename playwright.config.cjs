@@ -71,7 +71,7 @@ module.exports = defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: process.platform === 'win32' ? 'set DEV_MODE=test && npm run dev' : 'DEV_MODE=test npm run dev',
+    command: 'npm run dev',
     port: 3000,
     reuseExistingServer: !process.env.CI,
   }

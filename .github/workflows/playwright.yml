@@ -13,7 +13,7 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-        
+
     # Install backend dependencies
     - name: Install backend dependencies
       run: npm ci
@@ -25,7 +25,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npm run dev && npx playwright test
+      run: npx playwright test
       env:
         DEV_MODE: test
     - uses: actions/upload-artifact@v4
