@@ -13,6 +13,9 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+    # Set type:module in package.json
+    - name: Set type:module in package.json
+      run: npm run prepare:module
 
     # Install backend dependencies
     - name: Install backend dependencies
@@ -22,8 +25,11 @@ jobs:
     - name: Install frontend dependencies
       run: npm ci --prefix ./client
 
+    # Install Playwright browsers
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
+    # Run and generate Playwright report  
     - name: Run Playwright tests
       run: npx playwright test
       env:
@@ -34,3 +40,7 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+
+    # Restore package.json
+    - name: Restore original package.json
+      run: npm run restore:commonjs
