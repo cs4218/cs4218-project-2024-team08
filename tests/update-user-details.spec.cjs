@@ -16,7 +16,7 @@ test.describe.serial("Serial tests for shared account", () => {
       'a.list-group-item.list-group-item-action[href="/dashboard/user/profile"]'
     );
     await page.getByRole("link", { name: "Profile" }).click();
-    await page.fill('input[placeholder="Enter Your Password"]', "1234567");
+    await page.fill('input[placeholder="Enter Your Password"]', "");
     await page.getByRole("button", { name: "UPDATE" }).click();
     await expect(
       page.locator("text=Profile Updated Successfully")
@@ -30,7 +30,7 @@ test.describe.serial("Serial tests for shared account", () => {
     await page.getByRole("link", { name: "Login" }).click();
     await page.getByPlaceholder("Enter Your Email ").fill("1234@Email.com");
     await page.getByPlaceholder("Enter Your Password").click();
-    await page.getByPlaceholder("Enter Your Password").fill("1234567");
+    await page.getByPlaceholder("Enter Your Password").fill("TestTest123123");
     await page.getByRole("button", { name: "LOGIN" }).click();
     // expect login success
     await page.locator('a[role="button"].nav-link.dropdown-toggle').click();

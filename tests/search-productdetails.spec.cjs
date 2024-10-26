@@ -1,5 +1,4 @@
-const { test, expect } = require('@playwright/test');
-const { describe } = require('node:test');
+const { test, expect, describe } = require('@playwright/test');
 const AdminUsername = 'Test123@Email.com';
 const AdminPassword = 'TestTest123123';
 
@@ -27,7 +26,7 @@ const mockProducts = [
 
 let context;
 let page;
-
+test.use({ storageState: {} });
 test.describe.serial('Search and ProductDetails Components', () => {
     test.beforeAll(async ({ browser }) => {
         // Create a new browser context and page

@@ -1,21 +1,17 @@
 const { test, expect } = require("@playwright/test");
 const { describe, beforeEach, afterEach } = test;
 
-//Set the email and password for the admin
+// Set the email and password for the admin user
+// Admin user should be in the fake database
 const adminEmail = "Test123@Email.com";
 const adminPassword = "TestTest123123";
 const adminUsername = "TestTest123123";
 
 const generateCategory = () => {
   let category = '';
-
-  // Continue generating random strings until we get one long enough
   while (category.length < 25) {
-      // Generate a base-36 string and append it to category
-      category += Math.random().toString(36).substring(2); // Start from index 2 to skip "0."
+      category += Math.random().toString(36).substring(2);
   }
-
-  // Slice to ensure it is exactly 25 characters long
   return category.substring(0, 25);
 }
 
