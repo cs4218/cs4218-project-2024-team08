@@ -13,8 +13,15 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
+        
+    # Install backend dependencies
+    - name: Install backend dependencies
       run: npm ci
+
+    # Install frontend dependencies
+    - name: Install frontend dependencies
+      run: npm ci --prefix ./client
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
