@@ -1,0 +1,47 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    # Prepare package.json
+    - name: Prepare package.json
+      run: npm run prepare:module
+
+    # Install backend dependencies
+    - name: Install backend dependencies
+      run: npm ci
+
+    # Install frontend dependencies
+    - name: Install frontend dependencies
+      run: npm ci --prefix ./client
+
+    # Install Playwright browsers
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
+    # Run and generate Playwright report  
+    - name: Run Playwright tests
+      run: npx playwright test
+      env:
+        DEV_MODE: test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+
+    # Restore package.json
+    - name: Restore package.json
+      run: npm run restore:commonjs
